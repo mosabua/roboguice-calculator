@@ -13,11 +13,13 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 
+@ContentView(R.layout.main)
 public class CalculatorActivity extends RoboActivity {
     @InjectView(R.id.tape) TickerTapeView tapeView;
     @InjectView(R.id.enter) Button enterButton;
@@ -28,21 +30,6 @@ public class CalculatorActivity extends RoboActivity {
     @InjectView(R.id.divide) Button divideButton;
 
     @Inject RpnStack stack;
-    @Inject SharedPreferences prefs;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-        tapeView.setStack(stack);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        refreshDisplay();
-    }
 
     public void onDigitClicked( View digit ) {
         stack.appendToDigitAccumulator( ((TextView) digit).getText() );

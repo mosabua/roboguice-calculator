@@ -1,11 +1,13 @@
 package roboguice.calculator.view;
 
 import roboguice.RoboGuice;
+import roboguice.activity.event.OnResumeEvent;
 import roboguice.calculator.util.RpnStack;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
+import roboguice.event.Observes;
 
 import java.util.Stack;
 
@@ -45,5 +47,9 @@ public class TickerTapeView extends TextView {
             text = line + "\n" + text + "\n";
 
         setText(text.trim());
+    }
+
+    protected void onResume( @Observes OnResumeEvent e ) {
+        refresh();
     }
 }
