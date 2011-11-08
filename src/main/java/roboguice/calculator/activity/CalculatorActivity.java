@@ -44,19 +44,6 @@ public class CalculatorActivity extends RoboActivity {
         refreshDisplay();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        final SharedPreferences.Editor edit = prefs.edit();
-
-        edit.clear();
-
-        for( int i=0; i< stack.size(); ++i )
-            edit.putString(String.valueOf(i), stack.get(i).toString());
-
-        edit.commit();
-    }
-
     public void onDigitClicked( View digit ) {
         stack.appendToDigitAccumulator( ((TextView) digit).getText() );
         refreshDisplay();

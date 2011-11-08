@@ -2,6 +2,7 @@ package roboguice.calculator.util;
 
 import android.content.SharedPreferences;
 import com.google.inject.Inject;
+import roboguice.activity.event.OnPauseEvent;
 import roboguice.activity.event.OnResumeEvent;
 import roboguice.event.Observes;
 import roboguice.inject.ContextSingleton;
@@ -49,6 +50,18 @@ public class RpnStack extends Stack<BigDecimal> {
     public void restoreOnResume(@Observes OnResumeEvent e) {
         for( int i=0; prefs.contains(String.valueOf(i)); ++i)
             insertElementAt(new BigDecimal(prefs.getString(String.valueOf(i), null)), i);
+    }
+    
+    public void persistOnPause(@Observes OnPauseEvent e) {
+        final SharedPreferences.Editor edit = prefs.edit();
+
+        edit.clear();
+
+        for( int i=0; i< this.size(); ++i )
+            edit.putString(String.valueOf(i), this.get(i).toString());
+
+        edit.commit();
+
     }
 
 
