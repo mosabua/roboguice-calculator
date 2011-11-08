@@ -1,5 +1,6 @@
 package roboguice.calculator.activity;
 
+import roboguice.activity.RoboActivity;
 import roboguice.calculator.R;
 import roboguice.calculator.util.RpnStack;
 import roboguice.calculator.view.TickerTapeView;
@@ -11,18 +12,19 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import roboguice.inject.InjectView;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 
-public class CalculatorActivity extends Activity {
-    TickerTapeView tapeView;
-    Button enterButton;
-    Button deleteButton;
-    Button plusButton;
-    Button minusButton;
-    Button multiplyButton;
-    Button divideButton;
+public class CalculatorActivity extends RoboActivity {
+    @InjectView(R.id.tape) TickerTapeView tapeView;
+    @InjectView(R.id.enter) Button enterButton;
+    @InjectView(R.id.delete) Button deleteButton;
+    @InjectView(R.id.plus) Button plusButton;
+    @InjectView(R.id.minus) Button minusButton;
+    @InjectView(R.id.multiply) Button multiplyButton;
+    @InjectView(R.id.divide) Button divideButton;
 
     RpnStack stack;
     SharedPreferences prefs;
@@ -32,14 +34,6 @@ public class CalculatorActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
-        tapeView = (TickerTapeView) findViewById(R.id.tape);
-        enterButton = (Button) findViewById(R.id.enter);
-        deleteButton = (Button) findViewById(R.id.delete);
-        plusButton = (Button) findViewById(R.id.plus);
-        minusButton = (Button) findViewById(R.id.minus);
-        multiplyButton = (Button) findViewById(R.id.multiply);
-        divideButton = (Button) findViewById(R.id.divide);
 
         stack = new RpnStack();
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
