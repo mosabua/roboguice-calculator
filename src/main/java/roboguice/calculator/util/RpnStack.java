@@ -1,5 +1,11 @@
 package roboguice.calculator.util;
 
+import android.content.SharedPreferences;
+import com.google.inject.Inject;
+import roboguice.activity.event.OnResumeEvent;
+import roboguice.event.Observes;
+import roboguice.inject.ContextSingleton;
+
 import java.math.BigDecimal;
 import java.util.Stack;
 
@@ -14,11 +20,12 @@ import java.util.Stack;
  *
  * Is a singleton.
  */
+@ContextSingleton
 public class RpnStack extends Stack<BigDecimal> {
 
+    @Inject SharedPreferences prefs;
+
     String digitAccumulator = "";
-
-
 
     public String getDigitAccumulator() {
         return digitAccumulator;
@@ -37,6 +44,11 @@ public class RpnStack extends Stack<BigDecimal> {
             push(new BigDecimal(digitAccumulator));
             digitAccumulator="";
         }
+    }
+
+    public void restoreOnResume(@Observes OnResumeEvent e) {
+        for( int i=0; prefs.contains(String.valueOf(i)); ++i)
+            insertElementAt(new BigDecimal(prefs.getString(String.valueOf(i), null)), i);
     }
 
 

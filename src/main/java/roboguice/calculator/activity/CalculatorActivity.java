@@ -41,8 +41,6 @@ public class CalculatorActivity extends RoboActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        for( int i=0; prefs.contains(String.valueOf(i)); ++i)
-            stack.insertElementAt(new BigDecimal(prefs.getString(String.valueOf(i), null)), i);
         refreshDisplay();
     }
 
