@@ -1,5 +1,6 @@
 package roboguice.calculator.activity;
 
+import com.google.inject.Inject;
 import roboguice.activity.RoboActivity;
 import roboguice.calculator.R;
 import roboguice.calculator.util.RpnStack;
@@ -27,7 +28,7 @@ public class CalculatorActivity extends RoboActivity {
     @InjectView(R.id.divide) Button divideButton;
 
     RpnStack stack;
-    SharedPreferences prefs;
+    @Inject SharedPreferences prefs;
 
 
     @Override
@@ -36,7 +37,6 @@ public class CalculatorActivity extends RoboActivity {
         setContentView(R.layout.main);
 
         stack = new RpnStack();
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         tapeView.setStack(stack);
 
