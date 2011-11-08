@@ -27,7 +27,7 @@ public class CalculatorActivity extends RoboActivity {
     @InjectView(R.id.multiply) Button multiplyButton;
     @InjectView(R.id.divide) Button divideButton;
 
-    RpnStack stack;
+    @Inject RpnStack stack;
     @Inject SharedPreferences prefs;
 
 
@@ -35,11 +35,7 @@ public class CalculatorActivity extends RoboActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
-        stack = new RpnStack();
-
         tapeView.setStack(stack);
-
     }
 
     @Override
