@@ -12,13 +12,18 @@
         <dependency>
             <groupId>org.roboguice</groupId>
             <artifactId>roboguice</artifactId>
-            <version>2.0-SNAPSHOT</version>
+            <version>2.0b3</version>
         </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
             <version>3.0</version>
             <classifier>no_aop</classifier>
+        </dependency>
+        <dependency>
+            <groupId>android.support</groupId>
+            <artifactId>compatibility-v4</artifactId>
+            <version>r4</version>
         </dependency>
 
         <!-- Provided Dependencies -->
@@ -56,12 +61,13 @@
             <plugin>
                 <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                 <artifactId>android-maven-plugin</artifactId>
-                <version>3.0.0-SNAPSHOT</version>
+                <version>3.0.0</version>
                 <configuration>
+                    <!-- not necessary, but showcasing default in case you want to override -->
                     <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
                     <assetsDirectory>${project.basedir}/assets</assetsDirectory>
                     <resourceDirectory>${project.basedir}/res</resourceDirectory>
-                    <nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
+
                     <sdk>
                         <platform>10</platform>
                     </sdk>
